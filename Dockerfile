@@ -8,8 +8,7 @@ RUN apk add --no-cache samba samba-common-tools supervisor
 # create a dir for the config and the share
 RUN mkdir /config /share
 
-# copy config files from project folder to get a default config going for samba and supervisord
-COPY *.conf /config/
+# copy start script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
