@@ -8,20 +8,41 @@ and become the "local master" on your subnet, you need to supply the "--net=host
 
 Quick start for the impatient:
 ```shell
-docker run -d --net=host -v /path/to/share/:/shared --name samba pwntr/samba-alpine
+docker run -d --net=host -v /path/to/share/:/share --name samba babim/samba
 ```
 
 When NetBIOS discovery is not needed
 ```shell
-docker run -d -p 137-139:137-139 -p 445:445 -v /path/to/share/:/shared --name samba pwntr/samba-alpine
+docker run -d -p 137-139:137-139 -p 445:445 -v /path/to/share/:/share --name samba babim/samba
 ```
 
 With your own smb.conf and supervisord.conf configs:
 ```shell
-docker run -d -p 137-139:137-139 -p 445:445 -v /path/to/configs/:/config -v /path/to/share/:/shared --name samba pwntr/samba-alpine
+docker run -d -p 137-139:137-139 -p 445:445 -v /path/to/configs/:/config -v /path/to/share/:/share --name samba babim/samba
 ```
 
 To have the container start when the host boots, add docker's restart policy:
 ```shell
-docker run -d --restart=always -p 137-139:137-139 -p 445:445 -v /path/to/share/:/shared --name samba pwntr/samba-alpine
+docker run -d --restart=always -p 137-139:137-139 -p 445:445 -v /path/to/share/:/share --name samba babim/samba
+```
+# Environment value (with -e option)
+```
+USER
+PASS
+WORKGROUP
+PUBLICNAME
+PUBLICFOLDER
+PRIVATENAME
+PRIVATEFOLDER
+```
+
+# Default without -e
+```
+USER = samba
+PASS = samba
+WORKGROUP = WORKGROUP
+PUBLICNAME = data
+PUBLICFOLDER = data
+PRIVATENAME = private
+PRIVATEFOLDER = private
 ```
