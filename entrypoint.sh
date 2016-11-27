@@ -1,11 +1,15 @@
 #!/bin/sh
 # value
 USER1=${USER:-samba}
+PASS=${PASS:-samba}
 WORKGROUP=${WORKGROUP:-WORKGROUP}
 HOSTNAME=$(hostname -s)
-PASS=${PASS:-samba}
+PUBLICNAME=${PUBLICSHARE:-/share/data}
+PUBLICFOLDER=${PUBLICFOLDER:-/share/data}
+PRIVATENAME=${PRIVATENAME:-/share/private}
+PRIVATEFOLDER=${PRIVATEFOLDER:-/share/private}
 
-if [ ! -D "/share/data" ]; then mkdir -p /share/data; fi
+if [ ! -D "$PUBLICFOLDER" ]; then mkdir -p $PUBLICFOLDER; fi
 
 # add a non-root user and group called "samba" with no password, no home dir, no shell, and gid/uid set to 1000
 RUN addgroup -g 1000 $USER1 && adduser -D -H -G $USER1 -s /bin/false -u 1000 $USER1
@@ -55,9 +59,9 @@ cat <<EOF>> /config/smb.conf
     printcap name = /dev/null
     disable spoolss = yes
 
-[data]
+[$PUBLICNAME]
     comment = Data
-    path = /share/data
+    path = $PUBLICFOLDER
     read only = yes
     write list = $USER1
     guest ok = yes
@@ -67,11 +71,11 @@ cat <<EOF>> /config/smb.conf
 EOF
 
 if [[ ! -z "${USER}" ]]; then
-if [ ! -D "/share/private" ]; then mkdir -p /share/private; fi
+if [ ! -D "$PRIVATEFOLDER" ]; then mkdir -p $PRIVATEFOLDER; fi
 cat <<EOF>> /config/smb.conf
-[private]
+[$PRIVATENAME]
     comment = Data private
-    path = /share/private
+    path = $PRIVATEFOLDER
     writeable = yes
     valid users = babim
     # getting rid of those annoying .DS_Store files created by Mac users...
