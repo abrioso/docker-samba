@@ -30,31 +30,6 @@ RUN addgroup -g 1000 $USER1 && adduser -D -H -G $USER1 -s /bin/false -u 1000 $US
 # create a samba user matching our user from above with a very simple password ("samba")
 RUN echo -e "$PASS\n$PASS" | smbpasswd -a -s -c /config/smb.conf $USER1
 
-# set config supervisord
-if [ ! -f "/config/supervisord.conf" ]; then
-cat <<EOF>> /config/supervisord.conf
-[supervisord]
-nodaemon=true
-loglevel=info
-
-# set some defaults and start samba in foreground (-F), logging to stdout (-S), and using our config (-s path)
-
-[program:smbd]
-command=smbd -F -S -s /config/smb.conf
-stdout_logfile=/dev/stdout
-stdout_logfile_maxbytes=0
-stderr_logfile=/dev/stderr
-stderr_logfile_maxbytes=0
-
-[program:nmbd]
-command=nmbd -F -S -s /config/smb.conf
-stdout_logfile=/dev/stdout
-stdout_logfile_maxbytes=0
-stderr_logfile=/dev/stderr
-stderr_logfile_maxbytes=0
-EOF
-fi
-
 # set config samba
 if [ ! -f "/config/smb.conf" ]; then
 cat <<EOF>> /config/smb.conf
