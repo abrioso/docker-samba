@@ -165,8 +165,8 @@ cat <<EOF>> /config/smb.conf
     delete veto files = yes
 EOF
 fi
-if [[ ! -z "${PUBLICFOLDER2}" ]]; then
-if [ ! -D "/share/$PUBLICFOLDER2" ]; then mkdir -p /share/$PUBLICFOLDER2; fi
+if [[ ! -z "${PUBLICFOLDER4}" ]]; then
+if [ ! -D "/share/$PUBLICFOLDER4" ]; then mkdir -p /share/$PUBLICFOLDER4; fi
 cat <<EOF>> /config/smb.conf
 [$PUBLICNAME4]
     comment = $PUBLICNAME4 public folder
