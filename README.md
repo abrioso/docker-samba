@@ -25,18 +25,18 @@ To have the container start when the host boots, add docker's restart policy:
 ```shell
 docker run -d --restart=always -p 137-139:137-139 -p 445:445 -v /path/to/share/:/share --name samba babim/samba
 ```
-# Environment value (with -e option)
+## Environment value (with -e option)
 ```
 USER
 PASS
 WORKGROUP
-PUBLICNAME
-PUBLICFOLDER
-PRIVATENAME
-PRIVATEFOLDER
+PUBLICNAME1 (from 1 to 4) default data
+PUBLICFOLDER1 (from 1 to 4) default data
+PRIVATENAME1 (from 1 to 4)
+PRIVATEFOLDER1 (from 1 to 4)
 ```
 
-# Default without -e
+## Default without -e
 ```
 USER = samba
 PASS = samba
