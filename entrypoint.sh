@@ -70,7 +70,7 @@ if [[ ! -z "${PUBLICFOLDER1}" ]]; then
 if [ ! -d "/share/$PUBLICFOLDER1" ]; then mkdir -p /share/$PUBLICFOLDER1 && chown -R $UID:$GID /share/$PUBLICFOLDER1; fi
 cat <<EOF>> $SHARECONFIG
 
-# share $PUBLICNAME1
+## share $PUBLICNAME1
 [$PUBLICNAME1]
     comment = $PUBLICNAME1 public folder
     path = /share/$PUBLICFOLDER1
@@ -82,11 +82,12 @@ cat <<EOF>> $SHARECONFIG
     delete veto files = yes
 EOF
 fi
+
 if [[ ! -z "${PRIVATEFOLDER1}" ]]; then
 if [ ! -d "/share/$PRIVATEFOLDER1" ]; then mkdir -p /share/$PRIVATEFOLDER1 && chown -R $UID:$GID /share/$PRIVATEFOLDER1; fi
 cat <<EOF>> $SHARECONFIG
 
-# share $PRIVATENAME1
+## share $PRIVATENAME1
 [$PRIVATENAME1]
     comment = $PRIVATENAME1 private folder
     path = /share/$PRIVATEFOLDER1
@@ -99,7 +100,7 @@ if [[ ! -z "${PRIVATEFOLDER2}" ]]; then
 if [ ! -d "/share/$PRIVATEFOLDER2" ]; then mkdir -p /share/$PRIVATEFOLDER2 && chown -R $UID:$GID /share/$PRIVATEFOLDER2; fi
 cat <<EOF>> $SHARECONFIG
 
-# share $PRIVATENAME2
+## share $PRIVATENAME2
 [$PRIVATENAME2]
     comment = $PRIVATENAME2 private folder
     path = /share/$PRIVATEFOLDER2
@@ -107,11 +108,12 @@ cat <<EOF>> $SHARECONFIG
     valid users = $USER
 EOF
 fi
+
 if [[ ! -z "${PRIVATEFOLDER3}" ]]; then
 if [ ! -d "/share/$PRIVATEFOLDER3" ]; then mkdir -p /share/$PRIVATEFOLDER3 && chown -R $UID:$GID /share/$PRIVATEFOLDER3; fi
 cat <<EOF>> $SHARECONFIG
 
-# share $PRIVATENAME3
+## share $PRIVATENAME3
 [$PRIVATENAME3]
     comment = $PRIVATENAME3 private folder
     path = /share/$PRIVATEFOLDER3
@@ -119,11 +121,12 @@ cat <<EOF>> $SHARECONFIG
     valid users = $USER
 EOF
 fi
+
 if [[ ! -z "${PRIVATEFOLDER4}" ]]; then
 if [ ! -d "/share/$PRIVATEFOLDER4" ]; then mkdir -p /share/$PRIVATEFOLDER4 && chown -R $UID:$GID /share/$PRIVATEFOLDER4; fi
 cat <<EOF>> $SHARECONFIG
 
-# share $PRIVATENAME4
+## share $PRIVATENAME4
 [$PRIVATENAME4]
     comment = $PRIVATENAME4 private folder
     path = /share/$PRIVATEFOLDER4
@@ -136,7 +139,7 @@ if [[ ! -z "${PUBLICFOLDER2}" ]]; then
 if [ ! -d "/share/$PUBLICFOLDER2" ]; then mkdir -p /share/$PUBLICFOLDER2 && chown -R $UID:$GID /share/$PUBLICFOLDER2; fi
 cat <<EOF>> $SHARECONFIG
 
-# share $PUBLICNAME2
+## share $PUBLICNAME2
 [$PUBLICNAME2]
     comment = $PUBLICNAME2 public folder
     path = /share/$PUBLICFOLDER2
@@ -148,11 +151,12 @@ cat <<EOF>> $SHARECONFIG
     delete veto files = yes
 EOF
 fi
+
 if [[ ! -z "${PUBLICFOLDER3}" ]]; then
 if [ ! -d "/share/$PUBLICFOLDER3" ]; then mkdir -p /share/$PUBLICFOLDER3 && chown -R $UID:$GID /share/$PUBLICFOLDER3; fi
 cat <<EOF>> $SHARECONFIG
 
-# share $PUBLICNAME3
+## share $PUBLICNAME3
 [$PUBLICNAME3]
     comment = $PUBLICNAME3 public folder
     path = /share/$PUBLICFOLDER3
@@ -164,11 +168,12 @@ cat <<EOF>> $SHARECONFIG
     delete veto files = yes
 EOF
 fi
+
 if [[ ! -z "${PUBLICFOLDER4}" ]]; then
 if [ ! -d "/share/$PUBLICFOLDER4" ]; then mkdir -p /share/$PUBLICFOLDER4 && chown -R $UID:$GID /share/$PUBLICFOLDER4; fi
 cat <<EOF>> $SHARECONFIG
 
-# share $PUBLICNAME4
+## share $PUBLICNAME4
 [$PUBLICNAME4]
     comment = $PUBLICNAME4 public folder
     path = /share/$PUBLICFOLDER4
