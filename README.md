@@ -29,8 +29,8 @@ docker run -d --restart=always -p 137-139:137-139 -p 445:445 -v /path/to/share/:
 ```
 USER
 PASS
-UID
-GID
+auid
+agid
 WORKGROUP
 PUBLICNAME1 (from 1 to 4) default data
 PUBLICFOLDER1 (from 1 to 4) default data
@@ -42,6 +42,7 @@ PRIVATEFOLDER1 (from 1 to 4)
 ```
 USER = samba
 PASS = samba
+auid/agid = 1000/1000
 WORKGROUP = WORKGROUP
 PUBLICNAME = data
 PUBLICFOLDER = data
