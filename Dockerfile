@@ -13,10 +13,11 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # volume mappings
-VOLUME ["/config", "/shared"]
+#VOLUME ["/config", "/share"]
+VOLUME ["/share"]
 
 # exposes samba's default ports (137, 138 for nmbd and 139, 445 for smbd)
 EXPOSE 137/udp 138/udp 139 445
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["smbd", "-F", "-S", "-s", "/config/smb.conf"]
+CMD ["supervisord", "-c", "/config/supervisord.conf"]
