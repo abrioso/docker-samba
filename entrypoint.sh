@@ -4,8 +4,8 @@ SHARECONFIG=/share/smb.conf
 
 USER=${USER:-samba}
 PASS=${PASS:-samba}
-UID=${UID:-1000}
-GID=${GID:-1000}
+auid=${auid:-1000}
+agid=${agid:-1000}
 WORKGROUP=${WORKGROUP:-WORKGROUP}
 HOSTNAME=$(hostname -s)
 PUBLICFOLDER1=${PUBLICFOLDER1:-data}
@@ -186,11 +186,15 @@ cat <<EOF>> $SHARECONFIG
 EOF
 fi
 
+if id $USER >/dev/null 2>&1; then
+        echo "user exists"
+else
+        echo "user does not exist"
 # add a non-root user and group called "samba" with no password, no home dir, no shell, and gid/uid set to 1000
-addgroup -g 1000 $USER && adduser -D -H -G $USER -s /bin/false -u 1000 $USER
-
+addgroup -g $agid $USER && adduser -D -H -G $USER -s /bin/false -u $auid $USER
 # create a samba user matching our user from above with a very simple password ("samba")
 echo -e "$PASS\n$PASS" | smbpasswd -a -s -c $SHARECONFIG $USER
+fi
 
 fi
 
