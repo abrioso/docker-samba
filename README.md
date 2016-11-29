@@ -29,6 +29,8 @@ docker run -d --restart=always -p 137-139:137-139 -p 445:445 -v /path/to/share/:
 ```
 USER
 PASS
+UID
+GID
 WORKGROUP
 PUBLICNAME1 (from 1 to 4) default data
 PUBLICFOLDER1 (from 1 to 4) default data
