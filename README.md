@@ -1,3 +1,5 @@
+[![](https://images.microbadger.com/badges/image/babim/samba.svg)](https://microbadger.com/images/babim/samba "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/samba.svg)](https://microbadger.com/images/babim/samba "Get your own version badge on microbadger.com")
+
 # samba-alpine
 A simple and super lightweight Samba docker container, based on the latest Alpine Linux base image 🐧🐋💻.
 
