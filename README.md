@@ -51,3 +51,9 @@ PUBLICFOLDER = data
 PRIVATENAME = private
 PRIVATEFOLDER = private
 ```
+BULK
+```
+-e PUBLICFOLDER="public1 public2 public3"
+-e PRIVATEFOLDER="private1 private2 private3"
+```
+Docker will auto create folder
