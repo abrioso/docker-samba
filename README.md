@@ -51,7 +51,7 @@ PUBLICFOLDER = data
 PRIVATENAME = private
 PRIVATEFOLDER = private
 ```
-BULK
+## BULK
 ```
 -e PUBLICFOLDER="public1 public2 public3"
 -e PRIVATEFOLDER="private1 private2 private3"
