@@ -12,6 +12,8 @@ PUBLICFOLDER1=${PUBLICFOLDER1:-data}
 PUBLICNAME1=${PUBLICNAME1:-$PUBLICFOLDER1}
 PRIVATEFOLDER1=${PRIVATEFOLDER1:-private}
 PRIVATENAME1=${PRIVATENAME1:-$PRIVATEFOLDER1}
+PUBLICNAME=${PUBLICNAME1:-$PUBLICFOLDER1}
+PRIVATENAME=${PRIVATENAME1:-$PRIVATEFOLDER1}
 
 #PUBLICFOLDER2=${PUBLICFOLDER2:-data2}
 #PUBLICNAME2=${PUBLICNAME2:-$PUBLICFOLDER2}
@@ -66,14 +68,50 @@ cat <<EOF>> $SHARECONFIG
     disable spoolss = yes
 EOF
 
+# bulk
+if [[ ! -z "${PUBLICFOLDER}" ]]; then
+for mnt in "${PUBLICFOLDER}"; do
+  src=$(echo $mnt | awk -F':' '{ print $1 }')
+  if [ ! -d "/share/$src" ]; then mkdir -p /share/$src && chown -R $UID:$GID "/share/$src"; fi
+  cat <<EOF>> $SHARECONFIG
+
+## share $src
+[$src]
+    comment = $src public folder
+    path = "/share/$src"
+    read only = yes
+    write list = $USER
+    guest ok = yes
+    # getting rid of those annoying .DS_Store files created by Mac users...
+    veto files = /._*/.DS_Store/
+    delete veto files = yes
+EOF
+done
+fi
+if [[ ! -z "${PRIVATEFOLDER}" ]]; then
+for mnt in "${PRIVATEFOLDER}"; do
+  src=$(echo $mnt | awk -F':' '{ print $1 }')
+  if [ ! -d "/share/$src" ]; then mkdir -p /share/$src && chown -R $UID:$GID "/share/$src"; fi
+  cat <<EOF>> $SHARECONFIG
+
+## share $src
+[$src]
+    comment = $src private folder
+    path = "/share/$src"
+    writeable = yes
+    valid users = $USER
+EOF
+done
+fi
+
 if [[ ! -z "${PUBLICFOLDER1}" ]]; then
-if [ ! -d "/share/$PUBLICFOLDER1" ]; then mkdir -p /share/$PUBLICFOLDER1 && chown -R $UID:$GID /share/$PUBLICFOLDER1; fi
+if [ ! -d "/share/$PUBLICFOLDER1" ]; then mkdir -p "/share/$PUBLICFOLDER1" && chown -R $UID:$GID "/share/$PUBLICFOLDER1"; fi
 cat <<EOF>> $SHARECONFIG
 
 ## share $PUBLICNAME1
 [$PUBLICNAME1]
     comment = $PUBLICNAME1 public folder
-    path = /share/$PUBLICFOLDER1
+    path = "/share/$PUBLICFOLDER1"
     read only = yes
     write list = $USER
     guest ok = yes
@@ -84,65 +122,65 @@ EOF
 fi
 
 if [[ ! -z "${PRIVATEFOLDER1}" ]]; then
-if [ ! -d "/share/$PRIVATEFOLDER1" ]; then mkdir -p /share/$PRIVATEFOLDER1 && chown -R $UID:$GID /share/$PRIVATEFOLDER1; fi
+if [ ! -d "/share/$PRIVATEFOLDER1" ]; then mkdir -p "/share/$PRIVATEFOLDER1" && chown -R $UID:$GID "/share/$PRIVATEFOLDER1"; fi
 cat <<EOF>> $SHARECONFIG
 
 ## share $PRIVATENAME1
 [$PRIVATENAME1]
     comment = $PRIVATENAME1 private folder
-    path = /share/$PRIVATEFOLDER1
+    path = "/share/$PRIVATEFOLDER1"
     writeable = yes
     valid users = $USER
 EOF
 fi
 
 if [[ ! -z "${PRIVATEFOLDER2}" ]]; then
-if [ ! -d "/share/$PRIVATEFOLDER2" ]; then mkdir -p /share/$PRIVATEFOLDER2 && chown -R $UID:$GID /share/$PRIVATEFOLDER2; fi
+if [ ! -d "/share/$PRIVATEFOLDER2" ]; then mkdir -p "/share/$PRIVATEFOLDER2" && chown -R $UID:$GID "/share/$PRIVATEFOLDER2"; fi
 cat <<EOF>> $SHARECONFIG
 
 ## share $PRIVATENAME2
 [$PRIVATENAME2]
     comment = $PRIVATENAME2 private folder
-    path = /share/$PRIVATEFOLDER2
+    path = "/share/$PRIVATEFOLDER2"
     writeable = yes
     valid users = $USER
 EOF
 fi
 
 if [[ ! -z "${PRIVATEFOLDER3}" ]]; then
-if [ ! -d "/share/$PRIVATEFOLDER3" ]; then mkdir -p /share/$PRIVATEFOLDER3 && chown -R $UID:$GID /share/$PRIVATEFOLDER3; fi
+if [ ! -d "/share/$PRIVATEFOLDER3" ]; then mkdir -p "/share/$PRIVATEFOLDER3" && chown -R $UID:$GID "/share/$PRIVATEFOLDER3"; fi
 cat <<EOF>> $SHARECONFIG
 
 ## share $PRIVATENAME3
 [$PRIVATENAME3]
     comment = $PRIVATENAME3 private folder
-    path = /share/$PRIVATEFOLDER3
+    path = "/share/$PRIVATEFOLDER3"
     writeable = yes
     valid users = $USER
 EOF
 fi
 
 if [[ ! -z "${PRIVATEFOLDER4}" ]]; then
-if [ ! -d "/share/$PRIVATEFOLDER4" ]; then mkdir -p /share/$PRIVATEFOLDER4 && chown -R $UID:$GID /share/$PRIVATEFOLDER4; fi
+if [ ! -d "/share/$PRIVATEFOLDER4" ]; then mkdir -p "/share/$PRIVATEFOLDER4" && chown -R $UID:$GID "/share/$PRIVATEFOLDER4"; fi
 cat <<EOF>> $SHARECONFIG
 
 ## share $PRIVATENAME4
 [$PRIVATENAME4]
     comment = $PRIVATENAME4 private folder
-    path = /share/$PRIVATEFOLDER4
+    path = "/share/$PRIVATEFOLDER4"
     writeable = yes
     valid users = $USER
 EOF
 fi
 
 if [[ ! -z "${PUBLICFOLDER2}" ]]; then
-if [ ! -d "/share/$PUBLICFOLDER2" ]; then mkdir -p /share/$PUBLICFOLDER2 && chown -R $UID:$GID /share/$PUBLICFOLDER2; fi
+if [ ! -d "/share/$PUBLICFOLDER2" ]; then mkdir -p "/share/$PUBLICFOLDER2" && chown -R $UID:$GID "/share/$PUBLICFOLDER2"; fi
 cat <<EOF>> $SHARECONFIG
 
 ## share $PUBLICNAME2
 [$PUBLICNAME2]
     comment = $PUBLICNAME2 public folder
-    path = /share/$PUBLICFOLDER2
+    path = "/share/$PUBLICFOLDER2"
     read only = yes
     write list = $USER
     guest ok = yes
@@ -153,13 +191,13 @@ EOF
 fi
 
 if [[ ! -z "${PUBLICFOLDER3}" ]]; then
-if [ ! -d "/share/$PUBLICFOLDER3" ]; then mkdir -p /share/$PUBLICFOLDER3 && chown -R $UID:$GID /share/$PUBLICFOLDER3; fi
+if [ ! -d "/share/$PUBLICFOLDER3" ]; then mkdir -p "/share/$PUBLICFOLDER3" && chown -R $UID:$GID "/share/$PUBLICFOLDER3"; fi
 cat <<EOF>> $SHARECONFIG
 
 ## share $PUBLICNAME3
 [$PUBLICNAME3]
     comment = $PUBLICNAME3 public folder
-    path = /share/$PUBLICFOLDER3
+    path = "/share/$PUBLICFOLDER3"
     read only = yes
     write list = $USER
     guest ok = yes
@@ -170,13 +208,13 @@ EOF
 fi
 
 if [[ ! -z "${PUBLICFOLDER4}" ]]; then
-if [ ! -d "/share/$PUBLICFOLDER4" ]; then mkdir -p /share/$PUBLICFOLDER4 && chown -R $UID:$GID /share/$PUBLICFOLDER4; fi
+if [ ! -d "/share/$PUBLICFOLDER4" ]; then mkdir -p "/share/$PUBLICFOLDER4" && chown -R $UID:$GID "/share/$PUBLICFOLDER4"; fi
 cat <<EOF>> $SHARECONFIG
 
 ## share $PUBLICNAME4
 [$PUBLICNAME4]
     comment = $PUBLICNAME4 public folder
-    path = /share/$PUBLICFOLDER4
+    path = "/share/$PUBLICFOLDER4"
     read only = yes
     write list = $USER
     guest ok = yes
