@@ -34,10 +34,6 @@ PASS
 auid
 agid
 WORKGROUP
-PUBLICNAME1 (from 1 to 4) default data
-PUBLICFOLDER1 (from 1 to 4) default data
-PRIVATENAME1 (from 1 to 4)
-PRIVATEFOLDER1 (from 1 to 4)
 ```
 
 ## Default without -e
@@ -46,10 +42,6 @@ USER = samba
 PASS = samba
 auid/agid = 1000/1000
 WORKGROUP = WORKGROUP
-PUBLICNAME = data
-PUBLICFOLDER = data
-PRIVATENAME = private
-PRIVATEFOLDER = private
 ```
 ## BULK
 ```
