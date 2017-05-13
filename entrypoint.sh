@@ -95,9 +95,9 @@ fi
 
 if [[ "$auid" = "0" ]]; then
         echo "user root"
-#        USER=root
+        USER=administrator
         # create a samba user matching our user from above with a very simple password ("samba")
-        echo -e "$PASS\n$PASS" | smbpasswd -a -s -c $SHARECONFIG $USER
+        echo -e "$PASS\n$PASS" | smbpasswd -s -c $SHARECONFIG $USER
 elif id $USER >/dev/null 2>&1; then
         echo "user exists"
 else
