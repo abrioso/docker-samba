@@ -56,7 +56,7 @@ EOF
 
 # bulk
 if [[ ! -z "${PUBLICFOLDER}" ]]; then
-for mnt in "${PUBLICFOLDER}"; do
+for mnt in `echo ${PUBLICFOLDER}`; do
   src=$(echo $mnt | awk -F':' '{ print $1 }')
   if [ ! -d "/share/$src" ]; then mkdir -p /share/$src && chown -R $UID:$GID "/share/$src"; fi
   cat <<EOF>> $SHARECONFIG
@@ -76,7 +76,7 @@ done
 fi
 
 if [[ ! -z "${PRIVATEFOLDER}" ]]; then
-for mnt in "${PRIVATEFOLDER}"; do
+for mnt in `echo ${PRIVATEFOLDER}`; do
   src=$(echo $mnt | awk -F':' '{ print $1 }')
   if [ ! -d "/share/$src" ]; then mkdir -p /share/$src && chown -R $UID:$GID "/share/$src"; fi
   cat <<EOF>> $SHARECONFIG
