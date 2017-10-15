@@ -1,6 +1,6 @@
-FROM babim/alpinebase
+FROM alpine
 
-LABEL Description="Simple and lightweight Samba docker container, based on Alpine Linux." Version="0.1"
+LABEL Description="Simple and lightweight Samba docker container, based on Alpine Linux (babim/samba fork)." Version="0.2"
 
 # install samba and supervisord and clear the cache afterwards
 RUN apk add --no-cache samba samba-common-tools supervisor
